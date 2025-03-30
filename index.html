@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock_</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="myHeader">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTujtZqiTOsJbfQ6ORKHVvPJr8Gzg4rpfPosA&s" alt="clock img" class="watch">
+        <h1>Clock_ <br><em>My everyday time partner</em></h1>
+    </header>
+    <br>
+
+    <center>
+        <div id="currentTime">
+            <h3></h3>
+        </div>
+
+        <div class="search-alarms-container">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Enter city name.. eg. London">
+                <button onclick="addCity()">Search City</button>
+            </div>
+        
+            <div class="alarms-container">
+                <h3>Alarms</h3>
+                <input type="time" id="alarmTime">
+                <button onclick="addAlarm()">Add Alarm</button>
+                <ul id="alarmList"></ul>
+            </div>
+        </div>
+        
+        <h3>Watchlist</h3>
+        <ul id="watchlist"></ul>
+
+        <br>
+        <br>
+        <div id="myFooter">
+            <h3><em>"You can do the unthinkable today"</em></h3>
+        </div>
+    </center>
+
+    
+
+    <script src="./index.js"></script>
+</body>
+
+</html>

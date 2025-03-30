@@ -1,0 +1,44 @@
+.myHeader {
+    background-color: black;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    position: relative;
+    height: 120px;
+}
+img {
+    position: absolute;
+    left: 22%;
+    top: 10%;
+    height: 100px;
+    border-radius: 10px;
+
+}
+#alarmTime{
+    border-radius: 10px;
+    padding: 12px 40px 12px 15px;
+}
+body {
+    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1950&q=80');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: blanchedalmond;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    font-size: 50px;
+    text-emphasis-color: white
+    ;
+}
+em {
+    font-size: 25px;
+}
+
+input[type="text"] {
+    padding: 12px 40px 12px 15px;
+    border-radius: 25px;
+    
+}
+
