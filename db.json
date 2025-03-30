@@ -1,0 +1,25 @@
+{
+  "timeZones": [
+    {
+      "id": "0939",
+      "name": "America/Guatemala"
+    },
+    {
+      "id": "764a",
+      "name": "Africa/Casablanca"
+    },
+    {
+      "id": "4811",
+      "name": "Africa/Conakry"
+    },
+    {
+      "id": "a153",
+      "name": "Africa/Ceuta"
+    },
+    {
+      "id": "e547",
+      "name": "Europe/London"
+    }
+    
+  ]
+}

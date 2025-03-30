@@ -19,23 +19,28 @@
         <div id="currentTime">
             <h3></h3>
         </div>
+        <div class="alarms-container">
+            <h3>Alarms</h3>
+            <input type="time" id="alarmTime">
+            <button onclick="addAlarm()">Add Alarm</button>
+            <ul id="alarmList"></ul>
+        </div>
 
         <div class="search-alarms-container">
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Enter city name.. eg. London">
-                <button onclick="addCity()">Search City</button>
+                <select id="timezoneSelect">
+                    <option value="">Search city by timezone.. eg. Europe/London</option>
+                </select>
+                <button id="add-btn">Add to Watchlist</button>
             </div>
         
-            <div class="alarms-container">
-                <h3>Alarms</h3>
-                <input type="time" id="alarmTime">
-                <button onclick="addAlarm()">Add Alarm</button>
-                <ul id="alarmList"></ul>
-            </div>
+            
         </div>
         
         <h3>Watchlist</h3>
-        <ul id="watchlist"></ul>
+        <div id="watchlist">
+            
+        </div>
 
         <br>
         <br>

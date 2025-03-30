@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded",()=>{
+
 fetch('https://timeapi.io/api/time/current/zone?timeZone=Africa%2FNairobi')
 .then(res => res.json())
 .then(data => {
@@ -16,22 +18,6 @@ fetch('https://timeapi.io/api/time/current/zone?timeZone=Africa%2FNairobi')
     const dayOfWeek = document.createElement('h3')
     dayOfWeek.textContent = data.dayOfWeek;
     timeContainer.appendChild(dayOfWeek);
-
-
-    fetch('https://timeapi.io/api/timezone/availabletimezones')
-    .then(res => res.json())
-    .then(timezones => {
-        if (timezones.includes("Africa/Nairobi")) {
-            const timezoneDisplay = document.createElement('h3');
-            timezoneDisplay.textContent = "Timezone: Africa/Nairobi";
-            timeContainer.appendChild(timezoneDisplay);
-        } else {
-            const timezoneDisplay = document.createElement('h3');
-            timezoneDisplay.textContent = "Timezone not found.";
-            timeContainer.appendChild(timezoneDisplay);
-        }
-    })
-    .catch(err => console.log("Timezone fetch error:", err.message));
 
     
 })
@@ -81,3 +67,104 @@ function displayAlarms() {
     });
 }
 
+async function searchCity(timeZone)  {
+   // timeZone = formatString(timeZone)
+    let result = await fetch(`https://timeapi.io/api/time/current/zone?timeZone=${timeZone}`)
+    let data = await result.json()
+    console.log(data)
+    return (data)
+
+}
+
+//searchCity(formatString("Africa/Nairobi"))
+searchCity("Australia/Victoria")
+
+// function formatString(input) {
+//     let parts = input.split("/");
+//     if (parts.length >= 2) {
+//         return `${parts[0]}%2F${parts[1]}`;
+//     }
+//     return input; 
+// }
+
+async function getTimezones() {
+    let result = await fetch('https://timeapi.io/api/timezone/availabletimezones') 
+    let data = await result.json()
+    let timezoneSelect = document.getElementById("timezoneSelect")
+    for (let element of data){
+        let timeZone = document.createElement('option')
+        timeZone.value = element
+        timeZone.textContent = element
+        timezoneSelect.appendChild(timeZone)
+    }
+    console.log(data);
+    
+}
+getTimezones()
+
+ let addtoWatchlistbtn = document.querySelector("#add-btn")
+ addtoWatchlistbtn.addEventListener('click', ()=>{
+    let timezoneInput = document.getElementById('timezoneSelect').value
+    searchCity(timezoneInput)
+    console.log(timezoneInput);
+    addToWatchlist(timezoneInput)
+ })
+
+ async function addToWatchlist(timeZone) {
+    let result = await fetch('http://localhost:3000/timeZones',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+            {name:timeZone}
+
+        )
+   })
+ }
+
+ async function displayWatchlist() {
+    let watchlist = document.getElementById('watchlist')
+    let result = await fetch('http://localhost:3000/timeZones')
+    let data = await result.json()
+    for (element of data){
+        let timeZonename = document.createElement('div')
+        timeZonename.className = "timeZonecard"
+        let timezoneData = await(searchCity(element.name))
+        timeZonename.innerHTML = `
+                <div class="city" id="city">${element.name}</div>
+                <div class="time" id="myTime">${timezoneData.time}</div>
+                <div class="day" id="day">${timezoneData.dayOfWeek}</div>
+                <button class="removebtn" id="removebtn" >x</button>
+        `
+        //searchCity(element.name)   
+        watchlist.appendChild(timeZonename)
+
+        
+    }
+    let removebtn = document.querySelector("#removebtn")
+    removebtn.addEventListener('click',()=>{
+    alert('clicked')
+})
+    console.log(data);
+    
+ }
+
+displayWatchlist()
+
+async function removeItem(timeZone) {
+    let result = await fetch(`http://localhost:3000/timeZones/${timeZone}`,{
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(
+            {name:timeZone}
+
+        )
+   })
+
+}
+
+
+})

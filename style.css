@@ -29,16 +29,35 @@ body {
 
 h1 {
     font-size: 50px;
-    text-emphasis-color: white
-    ;
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, 0.5);;
 }
 em {
     font-size: 25px;
 }
 
-input[type="text"] {
-    padding: 12px 40px 12px 15px;
+
+
+#timezoneSelect{
     border-radius: 25px;
-    
+    padding: 12px 40px 12px 15px;
 }
 
+#watchlist {
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+}
+
+.timeZonecard{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: aliceblue;
+    margin: 3px;
+    padding: 3px;
+    font-size: large;
+
+}
+
+#myTime{
+    font-size: 30px;
+}
