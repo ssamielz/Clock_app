@@ -31,12 +31,18 @@ h1 {
     font-size: 50px;
     color: aliceblue;
     background-color: rgba(0, 0, 0, 0.5);;
+    border-radius: 200px;
+    
 }
 em {
     font-size: 25px;
 }
 
-
+#alarms{
+    color: aliceblue;
+    font-size: 38px;
+    text-decoration: underline;
+}
 
 #timezoneSelect{
     border-radius: 25px;
@@ -47,8 +53,13 @@ em {
     display: flex;
     align-items: center ;
     justify-content: center;
+    
 }
-
+#watcc{
+    color: aliceblue;
+    font-size: 38px;
+    text-decoration: underline;
+}
 .timeZonecard{
     background-color: rgba(0, 0, 0, 0.5);
     color: aliceblue;

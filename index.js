@@ -1,5 +1,3 @@
-document.addEventListener("DOMContentLoaded",()=>{
-
 fetch('https://timeapi.io/api/time/current/zone?timeZone=Africa%2FNairobi')
 .then(res => res.json())
 .then(data => {
@@ -14,10 +12,15 @@ fetch('https://timeapi.io/api/time/current/zone?timeZone=Africa%2FNairobi')
     const date = document.createElement('h3')
     date.textContent = data.date;
     timeContainer.appendChild(date);
+    date.style.fontSize ='27px'
 
     const dayOfWeek = document.createElement('h3')
     dayOfWeek.textContent = data.dayOfWeek;
     timeContainer.appendChild(dayOfWeek);
+
+    const timeZn = document.createElement('h3')
+    timeZn.textContent = data.timeZone;
+    timeContainer.appendChild(timeZn);
 
     
 })
@@ -108,7 +111,12 @@ getTimezones()
     searchCity(timezoneInput)
     console.log(timezoneInput);
     addToWatchlist(timezoneInput)
+
+    setTimeout(() => {
+        displayWatchlist(); // Calls the function after 3 seconds
+    }, 5000);
  })
+ 
 
  async function addToWatchlist(timeZone) {
     let result = await fetch('http://localhost:3000/timeZones',{
@@ -123,32 +131,65 @@ getTimezones()
    })
  }
 
- async function displayWatchlist() {
-    let watchlist = document.getElementById('watchlist')
-    let result = await fetch('http://localhost:3000/timeZones')
-    let data = await result.json()
-    for (element of data){
-        let timeZonename = document.createElement('div')
-        timeZonename.className = "timeZonecard"
-        let timezoneData = await(searchCity(element.name))
-        timeZonename.innerHTML = `
-                <div class="city" id="city">${element.name}</div>
-                <div class="time" id="myTime">${timezoneData.time}</div>
-                <div class="day" id="day">${timezoneData.dayOfWeek}</div>
-                <button class="removebtn" id="removebtn" >x</button>
-        `
-        //searchCity(element.name)   
-        watchlist.appendChild(timeZonename)
+//  async function displayWatchlist() {
+//     let watchlist = document.getElementById('watchlist')
+//     let result = await fetch('http://localhost:3000/timeZones')
+//     let data = await result.json()
+//     for (element of data){
+//         let timeZonename = document.createElement('div')
+//         timeZonename.className = "timeZonecard"
+//         let timezoneData = await(searchCity(element.name))
+//         timeZonename.innerHTML = `
+//                 <div class="city" id="city">${element.name}</div>
+//                 <div class="time" id="myTime">${timezoneData.time}</div>
+//                 <div class="day" id="day">${timezoneData.dayOfWeek}</div>
+//                 <button class="removebtns" id="removebtn" >x</button>
+//         `
+//         //searchCity(element.name)   
+//         watchlist.appendChild(timeZonename)
 
         
-    }
-    let removebtn = document.querySelector("#removebtn")
-    removebtn.addEventListener('click',()=>{
-    alert('clicked')
-})
-    console.log(data);
+//     }
+//     let removebtn = document.querySelector("#removebtn")
+//     removebtn.addEventListener('click',()=>{
+//     alert('clicked')
+// })
+//     console.log(data);
     
- }
+//  }
+
+async function displayWatchlist() {
+    let watchlist = document.getElementById('watchlist');
+    let result = await fetch('http://localhost:3000/timeZones');
+    let data = await result.json();
+
+    watchlist.innerHTML = ""; // Clear previous content
+
+    for (let element of data) {
+        let timeZonename = document.createElement('div');
+        timeZonename.className = "timeZonecard";
+
+        let timezoneData = await searchCity(element.name);
+
+        timeZonename.innerHTML = ` 
+            <div class="city">${element.name}</div>
+            <div class="time" id="myTime">${timezoneData.time}</div>
+            <div class="day">${timezoneData.dayOfWeek}</div>
+            <button class="removebtn">x</button>`
+            watchlist.appendChild(timeZonename);
+        }
+    
+        let removeButtons = document.querySelectorAll(".removebtn");
+        removeButtons.forEach(button => {
+            button.addEventListener("click", (event) => {
+    
+                event.target.parentElement.remove(); // Remove the clicked card
+            });
+        });
+    
+        console.log(data);
+    }
+
 
 displayWatchlist()
 
@@ -167,4 +208,4 @@ async function removeItem(timeZone) {
 }
 
 
-})
+
